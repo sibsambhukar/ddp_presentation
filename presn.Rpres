@@ -1,0 +1,54 @@
+Course Project Presentation
+========================================================
+author: Sibsambhu Kar
+date: 22nd March, 2015
+
+Slide2
+========================================================
+
+**Objectives**
+
+- Analyze variation of mileage (mpg) of mtcars dataset with respect to various parameters
+- Predict mileage of vehicle for a given parameter
+
+*data Summary*
+
+```{r}
+summary(mtcars)
+```
+Slide3
+========================================================
+**MPG vs number of Cyllinder & weight**
+
+```{r,echo=FALSE}
+mpg_variation<-lm(mtcars$mpg~mtcars$cyl,data=mtcars)
+par(mfrow=c(1,2),mar=c(4,4,2,1))
+plot(mtcars$cyl,mtcars$mpg,xlab="Number of cyllinders",ylab="MPG",col="black",cex=1.1,pch=21,frame=FALSE)
+abline(mpg_variation,lwd=2)
+plot(mtcars$wt,mtcars$mpg,xlab="Weight",ylab="MPG",col="black",cex=1.1,pch=21,frame=FALSE)
+abline(mpg_variation,lwd=2)
+
+```
+Slide4
+========================================================
+**MPG vs transmission**
+
+```{r, echo=FALSE}
+mpgTr<-lm(mtcars$mpg~am,data=mtcars)
+par(mfrow=c(1,2),mar=c(4,4,2,1))
+plot(mtcars$am,mtcars$mpg,xlab="Transmission",ylab="MPG",col="black",cex=1.1,pch=21,frame=FALSE)
+abline(mpgTr,lwd=2)
+boxplot(mtcars$mpg~mtcars$am,data=mtcars,xlab="Transmission",ylab="MPG",col="black",cex=1.1,pch=21,frame=FALSE)
+
+
+```
+Slide5
+========================================================
+** Prediction & Conclusion**
+
+```{r, echo=FALSE}
+test_cyl=6;
+model_fit<-lm(mtcars$mpg~mtcars$cyl,data=mtcars)
+mean_predict<-predict(model_fit,newdata=test_cyl)
+mean_predict
+```
